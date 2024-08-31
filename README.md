@@ -1,3 +1,3 @@
-# Finance News Sentiments Classifier
+# Finance News Sentiment Classifier
 
-Tells if a finance news is either negative, neutral or positive.
+Tells if finance news is either negative, neutral or positive.
