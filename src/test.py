@@ -12,7 +12,10 @@ def test_bert_endpoint(endpoint_name, text=None, batch=False):
         batch (bool, optional): Whether to test with batch input
     """
     # Initialize SageMaker runtime client
-    runtime = boto3.client('sagemaker-runtime')
+    runtime = boto3.client(
+        'sagemaker-runtime',
+        region_name="eu-west-3"
+    )
 
     # Prepare input data
     if batch:
