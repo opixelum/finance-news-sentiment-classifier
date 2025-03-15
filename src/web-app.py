@@ -3,7 +3,7 @@ from test import test_bert_endpoint
 
 endpoint = "finance-news-sentiments-classifier"
 
-st.title("Lajan")
+st.title("FinMood")
 st.write("This model predicts the sentiment of a news article on the stock market.")
 
 finance_news: str = st.text_input("Enter the finance news below")
