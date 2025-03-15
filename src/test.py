@@ -34,7 +34,6 @@ def test_bert_endpoint(endpoint_name, text=None, batch=False):
             input_data = {'inputs': text}
         else:
             input_data = {'inputs': "I really enjoyed this product, it works great!"}
-        print(f"Testing endpoint with text: '{input_data['inputs']}'")
 
     # Invoke the endpoint
     response = runtime.invoke_endpoint(
