@@ -1,6 +1,6 @@
 import json
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, AutoConfig
 
 # Define global variables for model and tokenizer
 tokenizer = None
@@ -18,11 +18,11 @@ def model_fn(model_dir):
     Returns:
         tuple: The loaded model and tokenizer
     """
-    global tokenizer, model
 
     # Load tokenizer and model from the saved artifacts
+    config = AutoConfig.from_pretrained(model_dir)
+    model = AutoModelForSequenceClassification.from_pretrained(model_dir, config=config)
     tokenizer = AutoTokenizer.from_pretrained("nlptown/bert-base-multilingual-uncased-sentiment")
-    model = AutoModelForSequenceClassification.from_pretrained(model_dir)
 
     # Put model in evaluation mode
     model.eval()
