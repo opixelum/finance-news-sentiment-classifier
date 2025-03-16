@@ -1,7 +1,7 @@
 [project]
-name = "finance-news-sentiment-classifier"
+name = "finmood"
 version = "0.1.0"
-description = "Add your description here"
+description = "Finance news sentiment classifier"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

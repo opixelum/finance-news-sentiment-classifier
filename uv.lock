@@ -223,7 +223,7 @@ wheels = [
 ]
 
 [[package]]
-name = "finance-news-sentiment-classifier"
+name = "finmood"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
