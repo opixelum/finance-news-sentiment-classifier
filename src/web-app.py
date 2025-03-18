@@ -7,11 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# S3 bucket details
-BUCKET_NAME = 'sagemaker-eu-west-3-203918861682'
-S3_KEY = 'huggingface-pytorch-inference-2025-03-10-21-30-51-040/model.tar.gz'
-
-# Local file paths
 LOCAL_TAR_PATH = 'model.tar.gz'
 EXTRACTED_DIR = 'model'
 
@@ -29,7 +24,11 @@ def download_and_extract_model():
     # Download the tar.gz file from S3 if not already present
     if not os.path.exists(LOCAL_TAR_PATH):
         print("Downloading model archive from S3...")
-        s3.download_file(BUCKET_NAME, S3_KEY, LOCAL_TAR_PATH)
+        s3.download_file(
+            os.getenv("AWS_BUCKET_NAME"),
+            os.getenv("AWS_S3_KEY"),
+            LOCAL_TAR_PATH
+        )
 
     # Extract the tar.gz archive if not already extracted
     if not os.path.exists(EXTRACTED_DIR):
@@ -51,7 +50,7 @@ st.write("This model predicts the sentiment of a news article on the stock marke
 
 finance_news: str = st.text_input(
     label="Enter the finance news below:",
-    placeholder="Nvidia sales have increased"
+    placeholder="Nvidia sales have increased."
 )
 
 if st.button("Get sentiment"):
