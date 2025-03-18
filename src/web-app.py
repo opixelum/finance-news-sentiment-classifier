@@ -54,15 +54,18 @@ finance_news: str = st.text_input(
 )
 
 if st.button("Get sentiment"):
-    response = predict_fn({"inputs": finance_news}, (model, tokenizer))["predictions"]
-    probabilities = list(response["probabilities"].values())
-    index_max = probabilities.index(max(probabilities))
-    sentiment = "negative" if index_max == 0 else "neutral" if index_max == 1 else "positive"
-    probability = round(probabilities[index_max] * 100)
-
-    if sentiment == "negative":
-        st.markdown(f":red[This news is most likely **{sentiment}**, with a confidence of **{probability}%**.]")
-    elif sentiment == "positive":
-        st.markdown(f":green[This news is most likely **{sentiment}**, with a confidence of **{probability}%**.]")
+    if finance_news == "":
+        st.error("Please enter a news article.")
     else:
-        st.markdown(f"This news is most likely **{sentiment}**, with a confidence of **{probability}%**.")
+        response = predict_fn({"inputs": finance_news}, (model, tokenizer))["predictions"]
+        probabilities = list(response["probabilities"].values())
+        index_max = probabilities.index(max(probabilities))
+        sentiment = "negative" if index_max == 0 else "neutral" if index_max == 1 else "positive"
+        probability = round(probabilities[index_max] * 100)
+
+        if sentiment == "negative":
+            st.markdown(f":red[This news is most likely **{sentiment}**, with a confidence of **{probability}%**.]")
+        elif sentiment == "positive":
+            st.markdown(f":green[This news is most likely **{sentiment}**, with a confidence of **{probability}%**.]")
+        else:
+            st.markdown(f"This news is most likely **{sentiment}**, with a confidence of **{probability}%**.")
