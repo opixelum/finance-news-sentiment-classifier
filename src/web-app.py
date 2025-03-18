@@ -53,9 +53,9 @@ finance_news: str = st.text_input(
     placeholder="Nvidia sales have increased."
 )
 
-if st.button("Get sentiment"):
-    if finance_news == "":
-        st.error("Please enter a news article.")
+if st.button("Get sentiment") or finance_news:
+    if not finance_news:
+        st.error("Please enter a finance news.")
     else:
         response = predict_fn({"inputs": finance_news}, (model, tokenizer))["predictions"]
         probabilities = list(response["probabilities"].values())
